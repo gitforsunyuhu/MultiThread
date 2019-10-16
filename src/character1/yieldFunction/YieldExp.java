@@ -25,5 +25,6 @@ public class YieldExp extends Thread{
 	public static void main(String[] args){
 		YieldExp t = new YieldExp();
 		t.start();
+		t.setPriority(1);
 	}
 }
