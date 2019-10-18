@@ -13,7 +13,31 @@ public class StudentThread implements Runnable {
 	//该变量之后，可以将线程得到停止
 	volatile boolean keepRunning = true; 
 	
+	//如果改为了false说明被交上去做题了
+	volatile boolean keepSitting = true; 
+	
+	private Blackboard blackboard;
+	
+	public StudentThread(Blackboard blackboard){
+		this.blackboard = blackboard;
+	}
+	
 	@Override
 	public void run() {
+		while(keepRunning){
+			System.out.println("==="+Thread.currentThread().getName() + "正在认真听讲===");
+			try {
+				Thread.sleep(1000);
+				if(!keepSitting){
+					System.out.println("===" + Thread.currentThread().getName() + "走向黑板===");
+					for(int i=0;i<3;i++){
+						blackboard.write(i);
+					}
+					System.out.println("===" + Thread.currentThread().getName() + "从黑板下来了===");
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

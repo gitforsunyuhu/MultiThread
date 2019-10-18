@@ -7,20 +7,18 @@ package multiThreadExample2;
  */
 public class Blackboard{
 	
-	public void write() {
-		try {
-			// 如果没有接受到命令那么军队就会持续攻击
-			//开启10连击
-			for(int i=0; i<10; i++){
-				//执行进攻动作
-				System.out.println(Thread.currentThread().getName() + "正在进攻第[" + (i+1) +"]次");
+	private final Object lockObject = new Object();
+	public void write(int i) {
+		synchronized(lockObject){
+			try {
+				//开启板书
+				System.out.println(Thread.currentThread().getName() + "正在写第[" + (i+1) +"]行板书");
+				Thread.sleep(1000);
+				lockObject.notifyAll();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			Thread.sleep(2000);
-			//进攻结束了，鸣金收兵
-			System.out.println(Thread.currentThread().getName() + "进攻结束！！！");
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 }
