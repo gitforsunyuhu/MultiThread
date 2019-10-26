@@ -1,5 +1,7 @@
 package character2._3twoObjectTwoLock;
 
+import character2._4synchronizedMethodLockObject.ThreadB;
+
 /**
  * 两个线程访问两个对象时相互之间不会受到干扰,synchronized关键字取得是锁是对象锁
  * 并不是某一段代码或者方法，因此当访问不同的对象的时候不加synchronized关键字结果是一样的
